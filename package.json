@@ -14,9 +14,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "electron": "electron .",
+    "electron-dev": "react-scripts start & electron .",
+    "dist": "npm run build && electron-builder"
   },
+  "main": "public/electron.js",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -34,5 +36,33 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "electron": "^33.0.1",
+    "electron-builder": "^25.1.8",
+    "electron-is-dev": "^3.0.1"
+  },
+  "build": {
+    "appId": "com.saad888.notion-capture",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "public/electron.js"
+    ],
+    "extraResources": {
+      "from": "public/",
+      "to": "build/public"
+    },
+    "directories": {
+      "buildResources": "assets"
+    }
   }
 }
